@@ -2,6 +2,7 @@ package csd.week3.book;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,10 @@ public class BookController {
      * 
     */
     // your code here - you should add a constructor or a setter injection
-    
+    @Autowired
+    public BookController(BookService bookService){
+        this.bookService = bookService;
+    }
     
     /////////
     /**
@@ -75,8 +79,7 @@ public class BookController {
     @PutMapping("/books/{id}")
     public Book updateBook(@PathVariable Long id, @RequestBody Book newBookInfo){
         // your code here, pls also change the "return null" statement accordingly
-        
-        return null;
+        return bookService.updateBook(id, newBookInfo); 
     }
 
     /**
@@ -87,6 +90,7 @@ public class BookController {
      */
     @DeleteMapping("/books/{id}")
     public void deleteBook(@PathVariable Long id){
-        // your code here
+        bookService.deleteBook(id);
+        return ;
     }
 }

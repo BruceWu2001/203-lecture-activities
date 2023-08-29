@@ -3,6 +3,7 @@ package csd.week3.book;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.springframework.stereotype.Service;
 
@@ -59,7 +60,14 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public Book deleteBook(Long id){
-        // your code here
+        Iterator <Book> booksItr = books.iterator();
+        while (booksItr.hasNext()) {
+            Book book = booksItr.next();
+            if(book.getId().equals(id)){
+                booksItr.remove();
+                return book;
+            }
+        }
         return null;
     }
 }
